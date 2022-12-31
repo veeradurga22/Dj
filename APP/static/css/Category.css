@@ -1,0 +1,10 @@
+#Categery-Item div{
+    display: inline;
+} 
+#Categery-Item div a img{
+    border-radius: 50%;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    margin-left: 40px;
+
+}

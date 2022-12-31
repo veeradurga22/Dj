@@ -1,0 +1,168 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login-Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script type = "text/javascript" >  
+        function preventBack() { window.history.forward(); }  
+        setTimeout("preventBack()", 0);  
+        window.onunload = function () { null };  
+    </script> 
+    <style>
+        #all{
+            margin-top: 5%;
+            width: 70%;
+            
+        }
+        #login{
+            width: 100%;
+            height: 500px;
+            background-color:whitesmoke;
+            border-radius:20px;
+            box-shadow:0px 0px 10px grey;
+        }
+        #login div{
+            margin-top: 20px;
+
+        }
+        #login h1{
+            color:green;
+            padding-top: 20px;
+        }
+        #login div input[type="submit"]{
+            background-color:blueviolet ;
+            color:white;
+            width: 50%;
+            margin-left: 25%;
+            border-radius: 20px;
+            margin-top: 20px;
+        }
+        #login div input[type="submit"]:hover{
+            opacity: 0.7;
+            box-shadow: 0px 0px 5px black;
+            transition: all .2s;
+        }
+
+        #left-login{
+            background-color: blue;
+            height: 500px;
+            border-radius:20px;
+            box-shadow:0px 0px 10px grey;
+
+        }
+        #left-login img{
+            border-radius: 50%;
+            margin-top: 7%;
+            margin-left: 33%;
+        }
+        #left-login p{
+            margin-top: 7%;
+            color:white;
+            text-align: justify;
+        }
+        #left-login div button{
+            color:white;
+            background-color: red;
+            color: black;
+            width: 50%;
+            border-radius: 20px;
+        }
+        #left-login div button:hover{
+            opacity: 0.8;
+            box-shadow: 0px 0px 5px black;
+            transition: all .2s;
+        }
+
+        #left-login h3{
+            color:chartreuse;
+            text-align: center;
+            padding-top: 20px;
+        }
+        
+        @media screen and  (max-width: 650px){
+            #login{
+                width:90%;
+                margin-top: 50px;
+                background-color: rgb(211,211,211,0.9);
+                border:1px solid grey;
+            }
+            .body{
+                background-image: url('https://thumbs.dreamstime.com/b/online-shopping-website-laptop-screen-female-hands-typing-51465695.jpg');
+            }
+            #left-login{
+                width: 90%;
+            }
+            #all{
+                width:90%;
+            }
+        }
+    </style>
+
+
+</head>
+<body class="body">
+    <div class="container-md" id="all">
+        <div class="row">
+            <div class="col-md-6 col-lg-6 col-sm-12 d-none d-md-block">
+                <div class="container" id="left-login">
+                    <h3>E-Store</h3>
+                <img src="{% static '/images/login_img.png' %}" alt="" width="140px" height="140px">
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Temporibus, itaque placeat. Corporis repudiandae quod veniam dolore, ea nostrum autem ex inventore temporibus laborum beatae nulla ab natus facilis architecto suscipit.</p>
+                <div>
+                    <center><a href="{% url 'Signup' %}"><button class="btn btn-block">SignuP</button></a></center>
+                </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-6 col-sm-12">
+                <form action="{% url 'Login_Page' %}" method="post">
+                    {% csrf_token %}
+                    <div class="container" id="login">
+                        <center><h1>Login</h1>
+                        <p class="text-dark d-lg-none "><i>Don't have Account? </i><a href="{% url 'Signup' %}">Create</a></p></center>
+                        {% if error %}
+                            <p class="alert alert-danger">
+                                {{ error }}
+                            </p>
+                        {% endif %}
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"><i class="fa fa-user"></i></span>
+                            <input type="gmail" name="email" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                        </div>
+                        <div class="input-group mb-3 ">
+                            <span class="input-group-text" id="basic-addon2"><i class="fa fa-key"></i></span>
+                            <input type="password" name="password" class="form-control" placeholder="Password" arial-label="Password" aria-describedby="basic-addon2">
+                        </div>
+                        
+                         <div class="text-center">
+                                <p>or sign up with:</p>
+                                <button type="button" class="btn btn-link btn-floating mx-1">
+                                <i class="fa fa-facebook-f"></i>
+                                </button>
+    
+                                <button type="button" class="btn btn-link btn-floating mx-1">
+                                <i class="fa fa-google"></i>
+                                </button>
+    
+                                <button type="button" class="btn btn-link btn-floating mx-1">
+                                <i class="fa fa-twitter"></i>
+                                </button>
+    
+                                <button type="button" class="btn btn-link btn-floating mx-1">
+                                <i class="fa fa-github"></i>
+                                </button>
+                        </div>
+                        <div>
+                            <input type="submit" class="btn btn-block">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>

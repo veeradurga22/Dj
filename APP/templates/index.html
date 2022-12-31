@@ -1,0 +1,124 @@
+{% comment %} {% extends 'veeradurga.py' %} {% endcomment %}
+{% load static %}
+{% comment %} {% load veeradurga %} {% endcomment %}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+	
+  <title>E-commerce</title>
+    <!-- <link rel="stylesheet" href="{% static 'css/index.css' %}">  -->
+    <link rel="stylesheet" href="{% static 'css/Category.css' %}">
+    {% comment %} <script type = "text/javascript" >  
+      function preventBack() { window.history.forward(); }  
+      setTimeout("preventBack()", 0);  
+      window.onunload = function () { null };  
+  </script>  {% endcomment %}
+  <style>
+    body::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* Hide scrollbar for IE, Edge and Firefox */
+    body {
+      -ms-overflow-style: none;  /* IE and Edge */
+      scrollbar-width: none;  /* Firefox */
+      background-color: #f0f0f0;
+    }
+    #items{
+      background-color:lightcyan;
+      border:1px solid gray;
+      box-shadow: 1px 1px 5px gray;
+    }
+    #image .container{
+      padding:5px
+    }
+    #image .container img{
+      border-radius: 15px;
+    }
+    #image .container img:hover{
+      opacity:0.7;
+      transition:all .2s;
+      transform:scale(1.1)
+      }
+      
+  </style>
+</head>
+<body>
+  {% include 'navbar.html' %}
+
+  {% block content %}
+
+  {% endblock %} 
+<div class="container-fluid" id="Categery-Item"> 
+  {% for categery in categories %}
+  <div><a href="{% url 'Categories' categery.id %}"><img src="{{ categery.image.url }}" width="100px" height="100px"></a></div>
+  {% endfor %}
+</div>
+  <div id="carouselExampleIndicators" class="carousel slide w-100" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active"> 
+      <img src="{% static 'images/add1.png' %}" class="d-block w-100">
+    </div>
+    <div class="carousel-item">
+        <img src="{% static 'images/add2.png' %}" class="d-block w-100">
+    </div>
+    <div class="carousel-item">
+        <img src="{% static '/images/add3.png' %}" class="d-block w-100">
+      
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+<br><br><br>
+
+<div class="container-fluid" id="items">
+  <div class="row">
+    {% comment %} <img src="/media/images/shirt6.png"> {% endcomment %}
+    {% for product in products %}
+    <div class="col-md-4 col-sm-6 col-lg-3" id="image">
+      <div class="container mt-5">
+        <center>
+        {% if product.image %}
+          <img  src="{{ product.image.url }}"  width="240px" height="330px" id="images" alt="no image">
+        {% else %}
+        <img src="{% static 'images/add1.png' %}" alt="Not Found :(" width="260px" height="350px">
+        {% endif %}
+        <div class="card-title h5">{{ product.productname }}</div>
+        <div class="card-text">{{ product.productfullname }}</div>
+        <div class="card-text"><span style="font-size: 27px;font-family: arial;">₹ {{ product.price }}<span>&nbsp;<span style="margin-left: 5%;font-size: 17px;color:red;font-family: sans-serif;font-weight: bold;">{% widthratio  product.discount 1 100 %}% off</span>
+        
+        </div>
+        <form action = "{% url 'viewproduct' %}" method="POST">
+          {% csrf_token %}
+          <input type="text" name="productid" value={{ product.id }} readonly hidden >
+          <input type="text" name="customerid" value={{ customer.id }} readonly hidden>
+          <input type = "submit" class="btn btn-primary" style="width:240px" value="Buy Now">
+        </form>
+        </center>
+      </div>
+    </div>
+    {% endfor %}
+</div>
+
+  </div>
+</body>
+
+</html>

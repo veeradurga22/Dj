@@ -1,0 +1,104 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+  .navbar .navbar-nav .nav-item .dropdown-menu {
+      text-align: center;
+      box-shadow: 0px 0px 5px grey;
+
+      /* transition-duration: all .2s ; */
+    }
+    .navbar{
+      background-color: white;
+      font-family: 'calibri';
+      box-shadow: 1px 1px 5px gray;
+
+    }
+    .nav-item .nav-link{
+      color:black;
+      font-family:'calibri';
+      font-size: 20px;
+
+    }
+    .nav-item{
+      /* transition-duration: .4s; */
+      transform: linear;
+      transition: all .3s;
+      /* width: 100px; */
+      max-width: fit-content;
+      width: max-content;
+      border-radius:10px;
+      font-weight: normal;
+      /* padding-left: 2px; */
+    }
+    .nav-item:hover{
+      background-color: #f0f0f0;
+      
+    }
+
+    .nav-link:hover{
+      color:blue;
+    }  
+    /* @media screen and (max-width:800px) {
+      .navbar{
+        width: 100%;
+      }
+    } */
+  </style>
+</head>
+<body>
+  
+  <nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container-fluid">
+      <a href="{% url 'products' %}" class="navbar-brand" href="#">E-Store Management</a>
+      <span class="navbar-toggler navbar-toggler-icon" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fa fa-bars"></i>
+      </span>
+      <div class="collapse navbar-collapse text-center" id="navbarSupportedContent">
+        {% if home %}
+        <form class="d-flex">
+          <input class="form-control me-0 w-100" type="text" placeholder="Search" aria-label="Search">
+          <button class="btn" style="margin-left: -45px;border:none;" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </form>
+        {% endif %}
+        <ul class="navbar-nav mb-2 mb-lg-0 ms-auto">
+          <li class="nav-item ms-lg-5 text-center d-none d-lg-block">
+            <a href="{% url 'products' %}" class="nav-link active " aria-current="page" href="#"><i class="fa-solid fa-house-user"></i> Home</a>
+          </li>
+         
+          {% if login %}
+          <li class="nav-item ms-lg-5">
+            <a href="{% url 'profile' %}" class="nav-link" href="#"><i class="fa fa-user"></i>  My Profile</a>
+          </li>
+          <li class="nav-item ms-lg-5">
+            <a href="{% url 'Cart' %}" class="nav-link" href="#"><i class="fa-solid fa-bag-shopping"></i> Cart</a>
+          </li>
+          <li class="nav-item ms-lg-5">
+            <a href="{% url 'myorders' %}" class="nav-link" href="#"><i class="fa-solid fa-shopping-cart "></i> Orders</a>
+          </li>
+          <li class="nav-item ms-lg-5">
+            <a href="{% url 'logout' %}" class="nav-link" href="#"><i class="fa-solid fa-power-off"></i> Logout</a>
+          </li>
+          
+          {% else %}
+          <li class="nav-item ms-lg-5">
+            <a href="{% url 'Login' %}" class="nav-link" href="#"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
+          </li>
+          <li class="nav-item ms-lg-5">
+            <a href="{% url 'Signup' %}" class="nav-link" href="#"><i class="fa-solid fa-solid fa-user-plus"></i> SignUp</a>
+          </li>
+          
+          {% endif %}
+        </ul>
+        
+      </div>
+    </div>
+  </nav>
+</body>
+</html>
